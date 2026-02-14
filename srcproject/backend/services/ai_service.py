@@ -1,5 +1,6 @@
 import requests
 import os
+import re
 
 API_KEY = os.getenv("BACKBOARD_API_KEY")
 BASE_URL = "https://app.backboard.io/api"
@@ -38,35 +39,72 @@ def send_message(thread_id, content):
     )
     return response.json().get("content")
 
+import re
 
-def generate_flashcards(note_content: str):
+def extract_manual_flashcards(content: str):
+    pattern = r"\|\|(.*?)\|\|:\((.*?)\)"
+    matches = re.findall(pattern, content)
 
-    assistant_id = create_assistant()
-    thread_id = create_thread(assistant_id)
+    flashcards = []
+
+    for term, definition in matches:
+        flashcards.append({
+            "term": term.strip(),
+            "definition": definition.strip(),
+            "user_generated": True
+        })
+
+    # manually written patterned format
+    cleaned_content = re.sub(pattern, "", content)
+
+    return flashcards, cleaned_content
+
+def generate_ai_flashcards(note_content: str):
 
     prompt = f"""
-    Convert the following notes into exactly 15 key term flashcards.
+    From the following notes, generate up to 20 important key term flashcards.
 
     Each flashcard must contain:
-    - "term": a concise key concept (1–4 words)
-    - "definition": a clear, student-friendly explanation (1–3 sentences)
+    - "term"
+    - "definition"
 
-    Return ONLY valid JSON in this exact format:
-
+    Return ONLY valid JSON:
     [
-    {{
-        "term": "...",
-        "definition": "..."
-    }}
+        {{
+            "term": "...",
+            "definition": "..."
+        }}
     ]
 
     Notes:
     {note_content}
     """
 
+    assistant_id = create_assistant()
+    thread_id = create_thread(assistant_id)
     response_text = send_message(thread_id, prompt)
 
     import json, re
     cleaned = re.sub(r"```json|```", "", response_text).strip()
 
-    return json.loads(cleaned)
+    ai_cards = json.loads(cleaned)
+
+    # mark them as AI generated
+    for card in ai_cards:
+        card["user_generated"] = False
+
+    return ai_cards
+
+def generate_flashcards(note_content: str):
+
+    # extract manual cards first
+    manual_cards, cleaned_content = extract_manual_flashcards(note_content)
+
+    # generate AI cards from remaining missed content
+    ai_cards = generate_ai_flashcards(cleaned_content)
+
+    # combine manual + ai generated content
+    all_cards = manual_cards + ai_cards
+
+    return all_cards
+
