@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-import os
-os.chdir("..")
+# import os
+# os.chdir("..")
 from db.database import get_db
 from db.models import Note, Flashcard
 from schemas.note_schema import NoteCreate

@@ -1,7 +1,9 @@
-from fastapi import APIRouter, Depends, Session
+from fastapi import APIRouter, Depends
+from sqlalchemy.orm import Session
 from schemas.folder_schema import FolderCreate, FolderResponse
-from srcproject.backend.db.database import get_db
-from srcproject.backend.services.Data import Folder
+from db.database import get_db
+from db.models import Folder
+
 
 router = APIRouter(prefix="/folders", tags=["Folders"])
 
