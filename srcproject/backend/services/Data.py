@@ -95,3 +95,58 @@ class Folder:
 
     def remove_note(self, note: Note): 
         self._notes.remove(note)
+
+
+class User:
+    def __init__(
+        self,
+        userId: int,
+        username: str,
+        password: str,
+        email: str,
+        folders: List[Folder] = [],
+    ):
+        self._userId = userId
+        self._username = username
+        self._password = password
+        self._email = email
+        self._folders = folders
+
+    # Getters
+    def get_userId(self) -> int:
+        return self._userId
+
+    def get_username(self) -> str:
+        return self._username
+
+    def get_password(self) -> str:
+        return self._password
+
+    def get_email(self) -> str:
+        return self._email
+
+    def get_folders(self) -> List[Folder]:
+        return self._folders
+
+    # Setters
+    def set_userId(self, userId: int):
+        self._userId = userId
+
+    def set_username(self, username: str):
+        self._username = username
+
+    def set_password(self, password: str):
+        self._password = password
+
+    def set_email(self, email: str):
+        self._email = email
+
+    # def set_folders(self, folders: List[Folder]):
+    #     self._folders = folders
+
+    # Convenience methods
+    def add_folder(self, folder: Folder):
+        self._folders.append(folder)
+
+    def remove_folder(self, folder:Folder): 
+        self._folders.remove(folder)
