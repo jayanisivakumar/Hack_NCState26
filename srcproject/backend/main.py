@@ -1,11 +1,11 @@
+
+from dotenv import load_dotenv
+load_dotenv()
 from fastapi import FastAPI
-from pydantic import BaseModel
+from api import routes_notes, routes_folders
 
 app = FastAPI()
 
-class NotesRequest(BaseModel):
-    notes: str
+app.include_router(routes_folders.router)
+app.include_router(routes_notes.router)
 
-@app.post("/generate")
-async def generate_flashcards(data: NotesRequest):
-    return {"message": "Backend working"}
