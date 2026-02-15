@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import NotesEditor from '../components/editor/NotesEditor'
 import FlashcardsPage from './FlashcardsPage'
+import AIToolsPage from './AIToolsPage'
 
 
 export default function EditorPage() {
@@ -30,7 +31,7 @@ export default function EditorPage() {
         <FlashcardsPage flashcards={flashcards} setFlashcards={setFlashcards} />
       )}
       {activeTab == "ai" && (
-        <div>AI tools will go here</div>
+        <AIToolsPage />
       )}
     </>
   )
