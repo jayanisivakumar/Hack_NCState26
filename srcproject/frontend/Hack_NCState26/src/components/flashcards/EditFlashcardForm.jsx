@@ -1,20 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-export default function AddFlashcardForm({ onAdd, onCancel }) {
+export default function EditFlashcardForm({ card, onSave, onCancel }) {
   const [term, setTerm] = useState("");
   const [definition, setDefinition] = useState("");
 
-  const handleSubmit = () => {
+  useEffect(() => {
+    if (card) {
+      setTerm(card.term);
+      setDefinition(card.definition);
+    }
+  }, [card]);
+
+  const handleSave = () => {
     if (!term.trim() || !definition.trim()) return;
 
-    onAdd({
-      id: crypto.randomUUID(),
+    onSave({
+      ...card,
       term,
       definition,
     });
-
-    setTerm("");
-    setDefinition("");
   };
 
   return (
@@ -28,11 +32,10 @@ export default function AddFlashcardForm({ onAdd, onCancel }) {
           onChange={(e) => setTerm(e.target.value)}
           className="w-full bg-gray-100 rounded-lg p-3 text-base focus:outline-none"
           rows={2}
-          placeholder="Enter term..."
         />
       </div>
 
-      {/* Back */}
+      {/* term */}
       <div className="mb-6">
         <p className="text-gray-500 mb-1">Back</p>
         <textarea
@@ -40,24 +43,23 @@ export default function AddFlashcardForm({ onAdd, onCancel }) {
           onChange={(e) => setDefinition(e.target.value)}
           className="w-full bg-gray-100 rounded-lg p-3 text-base focus:outline-none"
           rows={3}
-          placeholder="Enter definition..."
         />
       </div>
 
-      {/* Buttons */}
+      {/* buttons */}
       <div className="flex gap-3">
         <button
-          onClick={handleSubmit}
+          onClick={handleSave}
           className="px-5 py-2 rounded-lg bg-[#0B0C2A] text-white text-sm font-medium hover:opacity-90 transition cursor-pointer"
         >
-          + Add
+          ✓ Save
         </button>
 
         <button
           onClick={onCancel}
           className="px-5 py-2 rounded-lg border border-gray-300 text-sm font-medium hover:bg-gray-100 transition cursor-pointer"
         >
-          Cancel
+          ✕ Cancel
         </button>
       </div>
 
