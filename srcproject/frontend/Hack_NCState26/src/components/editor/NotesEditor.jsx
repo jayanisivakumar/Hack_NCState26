@@ -47,7 +47,11 @@ export default function NotesEditor({
         </p>
 
         <textarea
-          className="w-full h-150 p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 mb-6"
+          className="w-full min-h-[400px] p-4 border border-gray-300 rounded-lg 
+             focus:outline-none 
+             focus:border-purple-500 
+             focus:ring-4 focus:ring-purple-200 
+             transition-all duration-300 ease-out"
           placeholder="Start typing your notes here..."
           value={content}
           onChange={handleChange}

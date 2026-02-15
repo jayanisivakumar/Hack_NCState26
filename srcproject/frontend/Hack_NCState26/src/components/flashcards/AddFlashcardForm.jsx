@@ -20,29 +20,39 @@ export default function AddFlashcardForm({ onAdd, onCancel }) {
   return (
     <div className="w-full max-w-4xl bg-white rounded-xl p-6 border shadow-sm">
 
-      {/* Front */}
-      <div className="mb-4">
-        <p className="text-gray-500 mb-1">Front</p>
-        <textarea
-          value={term}
-          onChange={(e) => setTerm(e.target.value)}
-          className="w-full bg-gray-100 rounded-lg p-3 text-base focus:outline-none"
-          rows={2}
-          placeholder="Enter term..."
-        />
-      </div>
+  {/* Front */}
+  <div className="mb-4">
+    <p className="text-gray-500 mb-1">Front</p>
+    <textarea
+      value={term}
+      onChange={(e) => setTerm(e.target.value)}
+      rows={2}
+      placeholder="Enter term..."
+      className="w-full bg-gray-100 rounded-lg p-3 text-base 
+                 border border-gray-300 
+                 focus:outline-none 
+                 focus:border-purple-500 
+                 focus:ring-4 focus:ring-purple-200 
+                 transition-all duration-300 ease-out"
+    />
+  </div>
 
-      {/* Back */}
-      <div className="mb-6">
-        <p className="text-gray-500 mb-1">Back</p>
-        <textarea
-          value={definition}
-          onChange={(e) => setDefinition(e.target.value)}
-          className="w-full bg-gray-100 rounded-lg p-3 text-base focus:outline-none"
-          rows={3}
-          placeholder="Enter definition..."
-        />
-      </div>
+  {/* Back */}
+  <div className="mb-6">
+    <p className="text-gray-500 mb-1">Back</p>
+    <textarea
+      value={definition}
+      onChange={(e) => setDefinition(e.target.value)}
+      rows={3}
+      placeholder="Enter definition..."
+      className="w-full bg-gray-100 rounded-lg p-3 text-base 
+                 border border-gray-300 
+                 focus:outline-none 
+                 focus:border-purple-500 
+                 focus:ring-4 focus:ring-purple-200 
+                 transition-all duration-300 ease-out"
+    />
+  </div>
 
       {/* Buttons */}
       <div className="flex gap-3">
