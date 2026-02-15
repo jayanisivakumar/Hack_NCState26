@@ -36,7 +36,7 @@ export default function NotesEditor({
 
   return (
     <div className="min-h-screen flex justify-center items-start px-4">
-      <div className="w-full max-w-5xl bg-white rounded-2xl shadow-md p-8">
+      <div className="w-full max-w-5xl bg-white rounded-2xl shadow-md p-8 h-200">
         <h2 className="text-2xl mb-2">Notes Editor</h2>
         <p className="text-gray-500 mb-5">
           Write your notes naturally. Use{" "}
@@ -47,7 +47,7 @@ export default function NotesEditor({
         </p>
 
         <textarea
-          className="w-full min-h-[400px] p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 mb-6"
+          className="w-full h-150 p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 mb-6"
           placeholder="Start typing your notes here..."
           value={content}
           onChange={handleChange}
