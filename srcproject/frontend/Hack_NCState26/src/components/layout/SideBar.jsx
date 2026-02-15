@@ -35,7 +35,7 @@ export default function Sidebar({
 
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="text-gray-500 hover:text-black transition"
+          className="text-gray-500 hover:text-black transition cursor-pointer"
         >
           {isOpen ? <ChevronLeft size={18} /> : <ChevronRight size={18} />}
         </button>
